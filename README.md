@@ -1,5 +1,7 @@
 flashattention
+
 flashattention v2
+
 infiniattention
 
 하드웨어적 기술 - gpu 메모리 사용효율 극대화 
@@ -55,6 +57,13 @@ forward pass에서 구한 attention matrix를 저장하지 않고 backward pass�
 
 
 flashattention2
+
+기존 softmax
+![image](https://github.com/jinuk0211/flashattention/assets/150532431/775b4abc-001a-4fae-ad8b-d24929a0aece)
+
+local softmax
+![image](https://github.com/jinuk0211/flashattention/assets/150532431/523c0ed9-40f9-4104-be5f-07dc16405dcd)
+
 
 매트릭스 곱셈이 아닌 non matmul FLOP 감소
 
