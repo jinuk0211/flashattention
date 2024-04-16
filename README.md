@@ -135,3 +135,24 @@ flashattention 2 -  K와 V를 모든 워프에 접근할 수 있도록 유지하
 )
 ![image](https://github.com/jinuk0211/flashattention/assets/150532431/408302a0-7e86-4096-908a-52852219bdae)
 ![image](https://github.com/jinuk0211/flashattention/assets/150532431/90d42373-5d13-4bd9-8bcd-4e759d9643c2)
+
+
+3. 더 나은 online softmax 
+매트릭스 곱셈이 아닌 non matmul FLOP 을 줄이기
+
+컴퓨팅 속도 차이 A100
+
+312 TFLOPs/s of
+FP16/BF16 matmul 
+19.5 TFLOPs/s of
+non-matmul FP32.
+
+matmul
+compute-bound - 컴퓨팅에 연산시간 대부분 소요
+예시) matmul, convolution with large # of channels
+non matmul
+memory-bound - 메모리 접근에 연산시간 대부분 소요
+예시) elementwise ops(activation, dropout), reduction(sum, softmax, batchnorm, layernorm)
+1. diag 연산을 최소화 -> causal masking 연산 줄임 
+
+2. softmax의 max m과 지수들의 합(summation)을 backward를 위해 저장하지 않음
